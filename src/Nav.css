@@ -4,5 +4,12 @@ nav {
   justify-content: center;
   gap: 40px;
   background-color: rgb(226, 222, 222);
+}
 
+a {
+color:lightcoral;
+}
+a.active {
+  color: lightseagreen;
+  font-weight: 900;
 }
