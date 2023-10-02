@@ -1,19 +1,22 @@
 import { Link } from "react-router-dom";
+import "./Nav.css"
 
 function Nav({names}) {
   //make a list from names.
 
-  // function makeLinks(){
-  //   return names.map(name => {
-  //     return <Link to={`/dogs${name}`}>{name}</Link>;
-  //   })
-  // }
+  function makeLinks(){
+    return names.map(name => {
+      return <Link key={name} to={`/dogs/${name.toLowerCase()}`}>{name}</Link>;
+    })
+  }
 
-  // return (
-  //   <nav className="Nav">
-  //     {makeLinks()}
-  //   </nav>
-  // )
+  // let linkComponents = makeLinks();
+  // console.log(linkComponents);
+  return (
+    <nav className="Navbar">
+      {makeLinks()}
+    </nav>
+  )
 }
 
 

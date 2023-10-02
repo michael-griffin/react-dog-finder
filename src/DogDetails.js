@@ -1,5 +1,6 @@
 import { useParams } from "react-router-dom";
 
+const BASE_URL = 'http://localhost:5001/dogs';
 // {
 //   "name": "Whiskey",
 //     "age": 5,
@@ -15,26 +16,27 @@ import { useParams } from "react-router-dom";
  * It's either, getting all of the above from server?
  * Or getting it passed in as props?
  */
-function DogDetails() {
+function DogDetails({dogList}) {
+
     const params = useParams();
     const { name } = params;
+    const {src, age, facts} = dogList.filter(dog => dog.name.toLowerCase() === name)[0];
 
-    function find(dogName) {
-        //search through imported JSON?
-    }
 
     function displayFacts(facts) {
-        return facts.map((fact, ind) => {
-            <p key={ind}>{fact}</p>;
-        });
+      console.log('facts are:' , facts)
+        return facts.map((fact, ind) => (
+            <p key={ind}>{fact}</p>
+        ));
     }
 
+
     return (
-        <div className="DogDetails">
-            <p>{/* This dog's name is {name}, who is age {age}. */}</p>
-            <p>Here are some facts about {name}</p>
-            {displayFacts()}
-        </div>
+      <div className="DogDetails">
+        <p>This dog's name is {name}, who is age {age}</p>
+        <img style={{height: "300px" }}src={`/${src}.jpg`} />
+        {displayFacts(facts)}
+      </div>
     );
 }
 

@@ -1,4 +1,4 @@
-import { useState } from "react";
+
 
 /** Show all dogs
  * State:
@@ -7,36 +7,23 @@ import { useState } from "react";
  *
  * App -> DogList
  */
-function DogList() {
-    const [isLoaded, setIsLoaded] = useState(false);
-    const [dogList, setDogList] = useState([]);
+function DogList({dogList}) {
+  /** Show dog name and image */
 
-    /** API call to get all dogs */
-    async function fetchDogs() {
-        const response = await fetch("http://localhost:5001/dogs");
-        const data = await response.json();
-        setDogList(data);
-        setIsLoaded(true);
-        return data;
-    }
+  function renderDogList() {
+    return dogList.map((dog) => (
+      <div className="Dog" key={dog.name}>
+        <h2>{dog.name}</h2>
+        <img style={{height: "300px" }}src={`/${dog.src}.jpg`} />
+      </div>
+    ));
+  }
 
-    /** Show dog name and image */
-    function renderDogList() {
-        return dogList.map((dog) => (
-            <div className="Dog" key={dog.name}>
-                <img src={`${dog.src}.jpg`} />
-                <h2>{dog.name}</h2>;
-            </div>
-        ));
-    }
-
-    if (!isLoaded) fetchDogs();
-
-    return (
-        <div className="DogList">
-            {isLoaded ? renderDogList() : <h3>LOADING...</h3>}
-        </div>
-    );
+  return (
+    <div className="DogList">
+      {renderDogList()}
+    </div>
+  );
 }
 
 export default DogList;
